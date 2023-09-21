@@ -1,2 +1,6 @@
-package DTO.Enum;public enum Status {
+package DTO.Enum;
+
+public enum Status {
+    active,
+    inactive
 }

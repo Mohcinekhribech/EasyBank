@@ -1,6 +1,6 @@
 package DTO;
 
-public class User {
+public class Person {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
