@@ -2,19 +2,14 @@ package DTO;
 
 import DTO.Enum.OperationType;
 
+import java.util.Date;
+
 public class Operation {
     private int operationNumber;
-    private Date Date;
+    private java.util.Date Date;
     private Account account;
     private Employee employee;
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
 
     public Employee getEmployee() {
         return employee;

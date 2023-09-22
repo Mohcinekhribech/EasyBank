@@ -2,6 +2,7 @@ package DTO;
 
 import DTO.Enum.Status;
 
+import java.util.Date;
 import java.util.List;
 
 public class Account {

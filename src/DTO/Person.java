@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Date;
+
 public class Person {
     private String firstName;
     private String lastName;
