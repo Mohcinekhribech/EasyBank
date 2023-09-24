@@ -5,7 +5,7 @@ import java.util.Date;
 public class Person {
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private java.sql.Date  dateOfBirth;
     private String phoneNumber;
     private String email;
 
@@ -33,11 +33,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public java.sql.Date  getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(java.sql.Date  dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

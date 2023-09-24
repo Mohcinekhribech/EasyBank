@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Employee extends Person {
     private String registrationNumber ;
-    private Date recruitmentDate;
+    private java.sql.Date  recruitmentDate;
     private List<Operation> operations;
     private List<Affectation> affectations;
 
@@ -17,11 +17,11 @@ public class Employee extends Person {
         this.registrationNumber = registrationNumber;
     }
 
-    public Date getRecruitmentDate() {
+    public java.sql.Date  getRecruitmentDate() {
         return recruitmentDate;
     }
 
-    public void setRecruitmentDate(Date recruitmentDate) {
+    public void setRecruitmentDate(java.sql.Date  recruitmentDate) {
         this.recruitmentDate = recruitmentDate;
     }
 }
