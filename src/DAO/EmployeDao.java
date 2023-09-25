@@ -5,8 +5,9 @@ import Helpers.Database;
 import Interfaces.EmployeInterface;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.*;
 
 public class EmployeDao implements EmployeInterface {
     Connection connection = Database.ConnectToDb();
@@ -57,8 +58,27 @@ public class EmployeDao implements EmployeInterface {
     }
 
     @Override
-    public Optional<Employee> SearchByRegistrationNumber(String registratonNumber) {
-        return Optional.empty();
+    public Map<String,String> SearchByRegistrationNumber(String registratonNumber){
+        Map<String,String> employe = new HashMap<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN employe as em ON em.id = pr.id  where em.registrationNumber = ?;");
+            statement.setString(1,registratonNumber);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                employe.put("firstName",resultSet.getString("firstName"));
+                employe.put("lastName",resultSet.getString("lastName"));
+                employe.put("dateOfBirth",resultSet.getString("dateOfBirth"));
+                employe.put("phoneNumber",resultSet.getString("phoneNumber"));
+                employe.put("registrationNumber",resultSet.getString("registrationNumber"));
+                employe.put("recrutmentDate",resultSet.getString("recrutmentDate"));
+                employe.put("email",resultSet.getString("email"));
+                return employe;
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

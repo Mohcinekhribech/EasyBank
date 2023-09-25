@@ -11,6 +11,8 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         EmployeDao em = new EmployeDao();
-        System.out.println(em.delete("33333"));
+        for(String keys: em.SearchByRegistrationNumber("121212").keySet()){
+            System.out.println(keys+ " : "  +em.SearchByRegistrationNumber("121212").get(keys));
+        }
     }
 }
