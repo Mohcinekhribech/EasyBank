@@ -3,11 +3,11 @@ package DTO;
 import java.time.LocalDate;
 
 public class Person {
-    private String firstName;
-    private String lastName;
-    private LocalDate dateOfBirth;
-    private String phoneNumber;
-    private String email;
+    protected String firstName;
+    protected String lastName;
+    protected LocalDate dateOfBirth;
+    protected String phoneNumber;
+    protected String email;
 
     public String getEmail() {
         return email;
