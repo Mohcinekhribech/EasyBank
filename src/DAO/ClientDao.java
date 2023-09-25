@@ -4,11 +4,10 @@ import DTO.Client;
 import Helpers.Database;
 import Interfaces.ClientInterface;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ClientDao implements ClientInterface {
@@ -58,7 +57,25 @@ public class ClientDao implements ClientInterface {
     }
 
     @Override
-    public List<Client> searchByCode(String code) {
+    public Map<String,String> searchByCode(String code) {
+        Map<String,String> client = new HashMap<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN client as c ON c.id = pr.id  where c.code = ?;");
+            statement.setString(1,code);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                client.put("firstName",resultSet.getString("firstName"));
+                client.put("lastName",resultSet.getString("lastName"));
+                client.put("dateOfBirth",resultSet.getString("dateOfBirth"));
+                client.put("phoneNumber",resultSet.getString("phoneNumber"));
+                client.put("code",resultSet.getString("code"));
+                client.put("adress",resultSet.getString("adress"));
+                return client;
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 

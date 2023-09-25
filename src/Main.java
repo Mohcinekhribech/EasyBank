@@ -13,7 +13,11 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         ClientDao clientDao = new ClientDao();
-        System.out.println(clientDao.delete("AZERTY"));
+
+//        for(String keys: clientDao.searchByCode("AZERTY").keySet()){
+//            System.out.println(keys+ " : "  +clientDao.searchByCode("AZERTY").get(keys));
+//        }
+        //System.out.println(clientDao.delete("AZERTY"));
 //        Client client = new Client();
 //        client.setFirstName("Mohcine");
 //        client.setLastName("Khribech");
