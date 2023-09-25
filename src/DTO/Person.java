@@ -1,11 +1,11 @@
 package DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Person {
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String phoneNumber;
     private String email;
 
@@ -33,11 +33,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate  getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate  dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

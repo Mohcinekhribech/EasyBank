@@ -1,6 +1,18 @@
+import DAO.EmployeDao;
+import DTO.Employee;
 import Helpers.Database;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Optional;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+
+        EmployeDao em = new EmployeDao();
+        for(String keys: em.SearchByRegistrationNumber("121212").keySet()){
+            System.out.println(keys+ " : "  +em.SearchByRegistrationNumber("121212").get(keys));
+        }
     }
 }
