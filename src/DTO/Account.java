@@ -2,38 +2,38 @@ package DTO;
 
 import DTO.Enum.Status;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Account {
-    private int accountNumber;
-    private float balance;
-    private Date creationDate;
+    private String accountNumber;
+    private double balance;
+    private LocalDate creationDate;
     private Status status;
     private Client client;
     private List<Operation> operations;
 
-    public int getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
