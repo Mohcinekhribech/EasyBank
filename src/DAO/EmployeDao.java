@@ -12,38 +12,42 @@ public class EmployeDao implements EmployeInterface {
     Connection connection = Database.ConnectToDb();
     @Override
     public Optional<Employee> add(Optional<Employee> employee) throws SQLException {
-        if(employee.isEmpty())
-            return null;
-        try {
-            this.connection.setAutoCommit(false);
-            PreparedStatement statement = this.connection.prepareStatement("INSERT INTO person (firstName, lastName, dateofbirth, phonenumber) VALUES (?, ?, ?, ?) ;");
-            PreparedStatement statement1 = this.connection.prepareStatement("INSERT INTO employe (id, registrationNumber, recrutmentDate, email) VALUES ( (SELECT id FROM person WHERE firstName = ? AND lastName = ?), ?, ?, ?);");
-            statement.setString(1,employee.get().getFirstName());
-            statement.setString(2,employee.get().getLastName());
-            statement.setDate(3, employee.get().getDateOfBirth());
-            statement.setString(4,employee.get().getPhoneNumber());
-            statement1.setString(1,employee.get().getFirstName());
-            statement1.setString(2,employee.get().getLastName());
-            statement1.setString(3,employee.get().getRegistrationNumber());
-            statement1.setDate(4, employee.get().getRecruitmentDate());
-            statement1.setString(5,employee.get().getEmail());
-            if(statement.execute() && statement1.execute())
+        if(employee.isPresent()) {
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO person (firstName, lastName, dateofbirth, phonenumber) VALUES (?, ?, ?, ?)");
+            statement.setString(1, employee.get().getFirstName());
+            statement.setString(2, employee.get().getLastName());
+            statement.setDate(3, Date.valueOf(employee.get().getDateOfBirth()));
+            statement.setString(4, employee.get().getPhoneNumber());
+            if(statement.executeUpdate()>0)
             {
-                this.connection.commit();
-                return employee;
+                PreparedStatement statement1 = connection.prepareStatement("INSERT INTO employe (id, registrationNumber, recrutmentDate, email) VALUES ((SELECT id FROM person WHERE firstName = ? AND lastName = ? AND dateofbirth = ?), ?, ?, ?)");
+                statement1.setString(1, employee.get().getFirstName());
+                statement1.setString(2, employee.get().getLastName());
+                statement1.setDate(3, Date.valueOf(employee.get().getDateOfBirth()));
+                statement1.setString(4, employee.get().getRegistrationNumber());
+                statement1.setDate(5, Date.valueOf(employee.get().getRecruitmentDate()));
+                statement1.setString(6, employee.get().getEmail());
+                   if(statement1.executeUpdate()>0)
+                   {
+                       connection.commit();
+                       return employee;
+                   }
             }
-        }catch(Exception e)
-        {
-            this.connection.rollback();
-            throw new RuntimeException(e);
-        }finally {
-            this.connection.setAutoCommit(true);
         }
-        return null;
+        connection.rollback();
+        return Optional.empty();
     }
 
     @Override
     public int delete(String registrationNumber) {
+        try{
+            PreparedStatement statement = this.connection.prepareStatement("delete from employe where registrationnumber = ?");
+
+        }catch(Exception e)
+        {
+            throw new RuntimeException();
+        }
         return 0;
     }
 

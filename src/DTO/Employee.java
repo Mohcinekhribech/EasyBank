@@ -1,11 +1,11 @@
 package DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Employee extends Person {
     private String registrationNumber ;
-    private java.sql.Date  recruitmentDate;
+    private LocalDate recruitmentDate;
     private List<Operation> operations;
     private List<Affectation> affectations;
 
@@ -17,11 +17,11 @@ public class Employee extends Person {
         this.registrationNumber = registrationNumber;
     }
 
-    public java.sql.Date  getRecruitmentDate() {
+    public LocalDate  getRecruitmentDate() {
         return recruitmentDate;
     }
 
-    public void setRecruitmentDate(java.sql.Date  recruitmentDate) {
+    public void setRecruitmentDate(LocalDate  recruitmentDate) {
         this.recruitmentDate = recruitmentDate;
     }
 }
