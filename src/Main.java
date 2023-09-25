@@ -13,14 +13,15 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         ClientDao clientDao = new ClientDao();
-        Client client = new Client();
-        client.setFirstName("Mohcine");
-        client.setLastName("Khribech");
-        client.setAdress("Agadir");
-        client.setCode("AZERTY");
-        client.setDateOfBirth(LocalDate.parse("2020-02-02"));
-        client.setPhoneNumber("0631560367");
-        clientDao.add(Optional.of(client));
+        System.out.println(clientDao.delete("AZERTY"));
+//        Client client = new Client();
+//        client.setFirstName("Mohcine");
+//        client.setLastName("Khribech");
+//        client.setAdress("Agadir");
+//        client.setCode("AZERTY");
+//        client.setDateOfBirth(LocalDate.parse("2020-02-02"));
+//        client.setPhoneNumber("0631560367");
+//        clientDao.add(Optional.of(client));
 
 //        EmployeDao em = new EmployeDao();
 //        for(String keys: em.SearchByRegistrationNumber("121212").keySet()){

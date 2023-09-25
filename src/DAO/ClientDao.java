@@ -40,10 +40,16 @@ public class ClientDao implements ClientInterface {
         connection.rollback();
         return Optional.empty();
     }
-
     @Override
     public int delete(String code) {
-        return 0;
+        try{
+            PreparedStatement statement = this.connection.prepareStatement("delete from person where id = (select id from client where code = ?)");
+            statement.setString(1,code);
+            return statement.executeUpdate();
+        }catch(Exception e)
+        {
+            throw new RuntimeException();
+        }
     }
 
     @Override
