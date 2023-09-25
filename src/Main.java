@@ -1,12 +1,6 @@
-import DAO.ClientDao;
-import DAO.CurrentAccountDao;
-import DAO.EmployeDao;
-import DAO.SavingAccountDao;
-import DTO.Client;
-import DTO.CurrentAccount;
-import DTO.Employee;
+import DAO.*;
+import DTO.*;
 import DTO.Enum.Status;
-import DTO.SavingAccount;
 import Helpers.Database;
 
 import java.sql.SQLException;
@@ -19,16 +13,18 @@ public class Main {
 
         ClientDao clientDao = new ClientDao();
         Client client = new Client();
-        CurrentAccountDao currentAccountDao = new CurrentAccountDao();
-        CurrentAccount currentAccount = new CurrentAccount();
-        currentAccount.setAccountNumber("1234566");
-        currentAccount.setBalance(2000);
-        currentAccount.setCreationDate(LocalDate.parse("2020-04-20"));
-        currentAccount.setMaxPrice(20000);
-        client.setCode("AZERTY");
-        currentAccount.setClient(client);
-        currentAccount.setStatus(Status.active);
-        currentAccountDao.add(Optional.of(currentAccount));
+        AccountDao accountDao = new AccountDao();
+        System.out.println(accountDao.delete("1234567"));
+//        CurrentAccountDao currentAccountDao = new CurrentAccountDao();
+//        CurrentAccount currentAccount = new CurrentAccount();
+//        currentAccount.setAccountNumber("1234566");
+//        currentAccount.setBalance(2000);
+//        currentAccount.setCreationDate(LocalDate.parse("2020-04-20"));
+//        currentAccount.setMaxPrice(20000);
+//        client.setCode("AZERTY");
+//        currentAccount.setClient(client);
+//        currentAccount.setStatus(Status.active);
+//        currentAccountDao.add(Optional.of(currentAccount));
 //        for(String keys: clientDao.searchByCode("AZERTY").keySet()){
 //            System.out.println(keys+ " : "  +clientDao.searchByCode("AZERTY").get(keys));
 //        }
