@@ -42,13 +42,13 @@ public class EmployeDao implements EmployeInterface {
     @Override
     public int delete(String registrationNumber) {
         try{
-            PreparedStatement statement = this.connection.prepareStatement("delete from employe where registrationnumber = ?");
-
+            PreparedStatement statement = this.connection.prepareStatement("delete from person where id = (select id from employe where registrationNumber = ?)");
+            statement.setString(1,registrationNumber);
+            return statement.executeUpdate();
         }catch(Exception e)
         {
             throw new RuntimeException();
         }
-        return 0;
     }
 
     @Override
