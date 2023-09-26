@@ -6,6 +6,8 @@ import Helpers.Database;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class Main {
@@ -13,8 +15,16 @@ public class Main {
 
         ClientDao clientDao = new ClientDao();
         Client client = new Client();
-        AccountDao accountDao = new AccountDao();
-        System.out.println(accountDao.delete("1234567"));
+        SavingAccountDao savingAccount = new SavingAccountDao();
+
+        //System.out.println(accountDao.delete("1234567"));
+//        List<Map<String,String>> mapList = savingAccount.searchByClient("AZERTY");
+//        for(int i=0 ; i<mapList.size() ;i++)
+//        {
+//            for(String keys: mapList.get(i).keySet()){
+//           System.out.println(keys+ " : "  +mapList.get(i).get(keys));
+//            }
+//        }
 //        CurrentAccountDao currentAccountDao = new CurrentAccountDao();
 //        CurrentAccount currentAccount = new CurrentAccount();
 //        currentAccount.setAccountNumber("1234566");

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class AccountDao implements AccountInterface<Account>{
@@ -56,7 +57,9 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
-    public List<Account> searchByClient(Client client) {
+    public List<Map<String, String>> searchByClient(String clientCode) {
         return null;
     }
+
+
 }

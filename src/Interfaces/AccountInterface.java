@@ -7,6 +7,7 @@ import DTO.Enum.Status;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface AccountInterface<T> {
@@ -17,5 +18,5 @@ public interface AccountInterface<T> {
     List<Optional<T> > showByStatus(Status status);
     List<Optional<T> > show();
     boolean changeState(String accNum);
-    List<T> searchByClient(Client client);
+    List<Map<String,String>> searchByClient(String clientCode);
 }

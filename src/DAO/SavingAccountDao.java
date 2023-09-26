@@ -9,10 +9,9 @@ import Interfaces.AccountInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class SavingAccountDao implements AccountInterface<SavingAccount> {
     Connection connection = Database.ConnectToDb();
@@ -73,7 +72,28 @@ public class SavingAccountDao implements AccountInterface<SavingAccount> {
     }
 
     @Override
-    public List<SavingAccount> searchByClient(Client client) {
-        return null;
+    public List<Map<String, String>> searchByClient(String clientCode) {
+        Map<String,String> client = new HashMap<>();
+        List<Map<String,String>> clients = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM account AS acc INNER JOIN savingAccount as sv ON sv.id = acc.accountNumber  where acc.client_code = ?;");
+            statement.setString(1,clientCode);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                client.put("accountNumber",resultSet.getString("accountNumber"));
+                client.put("balance",resultSet.getString("balance"));
+                client.put("creationDate",resultSet.getString("creationDate"));
+                client.put("client_code",resultSet.getString("client_code"));
+                client.put("status",resultSet.getString("status"));
+                client.put("interestRate",resultSet.getString("interestrate"));
+                clients.add(client);
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return clients;
     }
+
+
 }
