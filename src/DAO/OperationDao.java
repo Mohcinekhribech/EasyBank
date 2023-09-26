@@ -33,7 +33,14 @@ public class OperationDao implements OperationInterface {
 
     @Override
     public int delete(int operationNumber) {
-        return 0;
+        try{
+            PreparedStatement statement = this.connection.prepareStatement("delete from operation where operationnumber = ?");
+            statement.setInt(1,operationNumber);
+            return statement.executeUpdate();
+        }catch(Exception e)
+        {
+            throw new RuntimeException();
+        }
     }
 
     @Override

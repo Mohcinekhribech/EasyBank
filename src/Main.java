@@ -17,17 +17,17 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         OperationDao operationDao = new OperationDao();
-        Operation operation = new Operation();
-        Account account = new Account();
-        Employee employee = new Employee();
-        account.setAccountNumber("1234566");
-        employee.setRegistrationNumber("121212");
-        operation.setAccount(account);
-        operation.setEmployee(employee);
-        operation.setPrice(10000);
-        operation.setDate(LocalDate.parse("2020-03-03"));
-        operation.setType(OperationType.payment);
-        operationDao.add(operation);
+//        Operation operation = new Operation();
+//        Account account = new Account();
+//        Employee employee = new Employee();
+//        account.setAccountNumber("1234566");
+//        employee.setRegistrationNumber("121212");
+//        operation.setAccount(account);
+//        operation.setEmployee(employee);
+//        operation.setPrice(10000);
+//        operation.setDate(LocalDate.parse("2020-03-03"));
+//        operation.setType(OperationType.payment);
+        System.out.println(operationDao.delete(2));
 
 //        EmployeDao em = new EmployeDao();
 //        for(String keys: em.SearchByRegistrationNumber("121212").keySet()){
