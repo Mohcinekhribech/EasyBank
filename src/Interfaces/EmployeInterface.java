@@ -14,4 +14,5 @@ public interface EmployeInterface {
     Optional<Employee> update(Employee employee,String registrationNumber);
     Map<String,String> SearchByRegistrationNumber(String registratonNumber);
     List<Optional<Employee>> Search(Employee employee);
+    List<Map<String,String>> getAll() ;
 }

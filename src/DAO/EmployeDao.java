@@ -86,4 +86,29 @@ public class EmployeDao implements EmployeInterface {
         return null;
     }
 
+    @Override
+    public List<Map<String, String>> getAll() {
+        Map<String,String> employe = new HashMap<>();
+        List<Map<String,String>> employes = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN employe as em ON em.id = pr.id ;");
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                employe.put("firstName",resultSet.getString("firstName"));
+                employe.put("lastName",resultSet.getString("lastName"));
+                employe.put("dateOfBirth",resultSet.getString("dateOfBirth"));
+                employe.put("phoneNumber",resultSet.getString("phoneNumber"));
+                employe.put("registrationNumber",resultSet.getString("registrationNumber"));
+                employe.put("recrutmentDate",resultSet.getString("recrutmentDate"));
+                employe.put("email",resultSet.getString("email"));
+                employes.add(employe);
+            }
+            return employes;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
