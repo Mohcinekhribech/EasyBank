@@ -107,7 +107,26 @@ public class ClientDao implements ClientInterface {
 
 
     @Override
-    public List<Client> showClients() {
+    public List<Map<String , String>> showClients() {
+        Map<String,String> cl = new HashMap<>();
+        List<Map<String , String>> clients = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN client as cl ON cl.id = pr.id ;");
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                cl.put("firstName",resultSet.getString("firstName"));
+                cl.put("lastName",resultSet.getString("lastName"));
+                cl.put("dateOfBirth",resultSet.getString("dateOfBirth"));
+                cl.put("phoneNumber",resultSet.getString("phoneNumber"));
+                cl.put("code",resultSet.getString("code"));
+                cl.put("adress",resultSet.getString("adress"));
+                clients.add(cl);
+            }
+            return clients;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 }
