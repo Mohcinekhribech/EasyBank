@@ -27,11 +27,11 @@ public class Main {
 //        operation.setPrice(10000);
 //        operation.setDate(LocalDate.parse("2020-03-03"));
 //        operation.setType(OperationType.payment);
-        System.out.println(operationDao.delete(2));
+        //System.out.println(operationDao.delete(2));
 
 //        EmployeDao em = new EmployeDao();
-//        for(String keys: em.SearchByRegistrationNumber("121212").keySet()){
-//            System.out.println(keys+ " : "  +em.SearchByRegistrationNumber("121212").get(keys));
-//        }
+        for(String keys: operationDao.searchOperationByNum(3).keySet()){
+            System.out.println(keys+ " : "  +operationDao.searchOperationByNum(3).get(keys));
+        }
     }
 }
