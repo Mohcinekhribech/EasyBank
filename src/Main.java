@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         MissionDao missionDao = new MissionDao();
+        System.out.println(missionDao.delete("1234"));
 //        Operation operation = new Operation();
 //        Account account = new Account();
 //        Employee employee = new Employee();

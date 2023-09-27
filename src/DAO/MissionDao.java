@@ -31,6 +31,13 @@ public class MissionDao implements MissionInterface {
 
     @Override
     public int delete(String code) {
-        return 0;
+        try{
+            PreparedStatement statement = this.connection.prepareStatement("delete from mission where code = ?");
+            statement.setString(1,code);
+            return statement.executeUpdate();
+        }catch(Exception e)
+        {
+            throw new RuntimeException();
+        }
     }
 }
