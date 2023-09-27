@@ -1,5 +1,9 @@
+import DAO.ClientDao;
 import DAO.EmployeDao;
-import DTO.Employee;
+import DAO.MissionDao;
+import DAO.OperationDao;
+import DTO.*;
+import DTO.Enum.OperationType;
 import Helpers.Database;
 
 import java.sql.SQLException;
@@ -12,14 +16,24 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        EmployeDao em = new EmployeDao();
-        Employee empl = new Employee();
-        empl.setPhoneNumber("06772527");
+        MissionDao missionDao = new MissionDao();
+        System.out.println(missionDao.delete("1234"));
+//        Operation operation = new Operation();
+//        Account account = new Account();
+//        Employee employee = new Employee();
+//        account.setAccountNumber("1234566");
+//        employee.setRegistrationNumber("121212");
+//        operation.setAccount(account);
+//        operation.setEmployee(employee);
+//        operation.setPrice(10000);
+//        operation.setDate(LocalDate.parse("2020-03-03"));
+//        operation.setType(OperationType.payment);
+        //System.out.println(operationDao.delete(2));
 
-        List<Map<String,String>> employes= em.Search(empl);
-        for (int i=0 ; i<employes.size();i++)
-        for(String keys: employes.get(i).keySet()){
-            System.out.println(keys+ " : "  +employes.get(i).get(keys));
-        }
+//        EmployeDao em = new EmployeDao();
+//        for(String keys: operationDao.searchOperationByNum(3).keySet()){
+//            System.out.println(keys+ " : "  +operationDao.searchOperationByNum(3).get(keys));
+//        }
+//    }
     }
 }
