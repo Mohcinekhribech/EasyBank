@@ -14,9 +14,10 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         ClientDao clientDao = new ClientDao();
-        Client client = new Client();
+        //Client client = new Client();
         SavingAccountDao savingAccount = new SavingAccountDao();
-
+        AccountDao accountDao = new AccountDao();
+        System.out.println(accountDao.changeState("1234566", String.valueOf(Status.active)));
         //System.out.println(accountDao.delete("1234567"));
 //        List<Map<String,String>> mapList = savingAccount.searchByClient("AZERTY");
 //        for(int i=0 ; i<mapList.size() ;i++)

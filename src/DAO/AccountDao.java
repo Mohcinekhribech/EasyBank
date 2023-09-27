@@ -52,8 +52,10 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
-    public boolean changeState(String accNum) {
-        return false;
+    public boolean changeState(String accNum,String status) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("update account set status = ?::status");
+        statement.setString(1, String.valueOf(status));
+        return statement.executeUpdate()>0;
     }
 
     @Override

@@ -67,7 +67,7 @@ public class SavingAccountDao implements AccountInterface<SavingAccount> {
     }
 
     @Override
-    public boolean changeState(String accNum) {
+    public boolean changeState(String accNum,String status) {
         return false;
     }
 

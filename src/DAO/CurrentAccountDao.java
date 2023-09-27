@@ -66,7 +66,7 @@ public class CurrentAccountDao implements AccountInterface<CurrentAccount> {
     }
 
     @Override
-    public boolean changeState(String accNum) {
+    public boolean changeState(String accNum,String status) {
         return false;
     }
 
