@@ -16,7 +16,7 @@ public interface AccountInterface<T> {
     Optional<T>  update(Optional<T>  account);
     List<Optional<T> > showByCreationDate(Date creationDate);
     List<Optional<T> > showByStatus(Status status);
-    List<Optional<T> > show();
+    List<Map<String,String>> show();
     boolean changeState(String accNum,String status) throws SQLException;
     List<Map<String,String>> searchByClient(String clientCode);
 }

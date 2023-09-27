@@ -17,15 +17,16 @@ public class Main {
         //Client client = new Client();
         SavingAccountDao savingAccount = new SavingAccountDao();
         AccountDao accountDao = new AccountDao();
-        System.out.println(accountDao.changeState("1234566", String.valueOf(Status.active)));
+
+        //System.out.println(accountDao.changeState("1234566", String.valueOf(Status.active)));
         //System.out.println(accountDao.delete("1234567"));
-//        List<Map<String,String>> mapList = savingAccount.searchByClient("AZERTY");
-//        for(int i=0 ; i<mapList.size() ;i++)
-//        {
-//            for(String keys: mapList.get(i).keySet()){
-//           System.out.println(keys+ " : "  +mapList.get(i).get(keys));
-//            }
-//        }
+        List<Map<String,String>> mapList = accountDao.show();
+        for(int i=0 ; i<mapList.size() ;i++)
+        {
+            for(String keys: mapList.get(i).keySet()){
+           System.out.println(keys+ " : "  +mapList.get(i).get(keys));
+            }
+        }
 //        CurrentAccountDao currentAccountDao = new CurrentAccountDao();
 //        CurrentAccount currentAccount = new CurrentAccount();
 //        currentAccount.setAccountNumber("1234566");

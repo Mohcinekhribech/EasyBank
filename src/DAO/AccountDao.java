@@ -8,11 +8,9 @@ import Interfaces.AccountInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class AccountDao implements AccountInterface<Account>{
     Connection connection = Database.ConnectToDb();
@@ -47,7 +45,25 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
-    public List<Optional<Account>> show() {
+    public List<Map<String, String>> show() {
+        Map<String,String> account = new HashMap<>();
+        List<Map<String,String>> accounts = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM account ;");
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                account.put("accountNumber",resultSet.getString("accountNumber"));
+                account.put("balance", String.valueOf(resultSet.getDouble("balance")));
+                account.put("creationDate",resultSet.getString("creationDate"));
+                account.put("client_code",resultSet.getString("client_code"));
+                account.put("status",resultSet.getString("status"));
+                accounts.add(account);
+            }
+            return accounts;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 
