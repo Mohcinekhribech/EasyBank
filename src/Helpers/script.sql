@@ -35,7 +35,7 @@ create table "SavingAccount" (
                                  id varchar(100) references account(accountNumber) primary key
 );
 create type "operationType" as enum ('payment','withdrawal');
-select * from operation;
+select * from mission;
 create table "operation" (
                              operationNumber serial primary key ,
                              date date ,

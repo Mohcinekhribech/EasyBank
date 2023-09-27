@@ -25,7 +25,7 @@ public class OperationDao implements OperationInterface {
             {
                 connection.commit();
                 return Optional.of(operation);
-            }
+            }   
             connection.rollback();
             return Optional.empty();
         }

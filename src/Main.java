@@ -1,11 +1,9 @@
 import DAO.ClientDao;
 import DAO.EmployeDao;
+import DAO.MissionDao;
 import DAO.OperationDao;
-import DTO.Account;
-import DTO.Client;
-import DTO.Employee;
+import DTO.*;
 import DTO.Enum.OperationType;
-import DTO.Operation;
 import Helpers.Database;
 
 import java.sql.SQLException;
@@ -16,7 +14,7 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        OperationDao operationDao = new OperationDao();
+        MissionDao missionDao = new MissionDao();
 //        Operation operation = new Operation();
 //        Account account = new Account();
 //        Employee employee = new Employee();
@@ -30,8 +28,9 @@ public class Main {
         //System.out.println(operationDao.delete(2));
 
 //        EmployeDao em = new EmployeDao();
-        for(String keys: operationDao.searchOperationByNum(3).keySet()){
-            System.out.println(keys+ " : "  +operationDao.searchOperationByNum(3).get(keys));
-        }
+//        for(String keys: operationDao.searchOperationByNum(3).keySet()){
+//            System.out.println(keys+ " : "  +operationDao.searchOperationByNum(3).get(keys));
+//        }
+//    }
     }
 }
