@@ -40,7 +40,26 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
-    public List<Optional<Account>> showByStatus(Status status) {
+    public List<Map<String , String>> showByStatus(Status status) {
+        Map<String,String> account = new HashMap<>();
+        List<Map<String,String>> accounts = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM account where status = ?::status;");
+            statement.setString(1, String.valueOf(status));
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                account.put("accountNumber",resultSet.getString("accountNumber"));
+                account.put("balance", String.valueOf(resultSet.getDouble("balance")));
+                account.put("creationDate",resultSet.getString("creationDate"));
+                account.put("client_code",resultSet.getString("client_code"));
+                account.put("status",resultSet.getString("status"));
+                accounts.add(account);
+            }
+            return accounts;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 

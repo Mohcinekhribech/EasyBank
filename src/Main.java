@@ -20,7 +20,7 @@ public class Main {
 
         //System.out.println(accountDao.changeState("1234566", String.valueOf(Status.active)));
         //System.out.println(accountDao.delete("1234567"));
-        List<Map<String,String>> mapList = accountDao.show();
+        List<Map<String,String>> mapList = accountDao.showByStatus(Status.active);
         for(int i=0 ; i<mapList.size() ;i++)
         {
             for(String keys: mapList.get(i).keySet()){
