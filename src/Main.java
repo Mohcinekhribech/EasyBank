@@ -13,7 +13,10 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         EmployeDao em = new EmployeDao();
-        List<Map<String,String>> employes= em.getAll();
+        Employee empl = new Employee();
+        empl.setPhoneNumber("06772527");
+
+        List<Map<String,String>> employes= em.Search(empl);
         for (int i=0 ; i<employes.size();i++)
         for(String keys: employes.get(i).keySet()){
             System.out.println(keys+ " : "  +employes.get(i).get(keys));
