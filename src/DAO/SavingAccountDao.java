@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class SavingAccountDao implements AccountInterface<SavingAccount> {
@@ -52,9 +53,10 @@ public class SavingAccountDao implements AccountInterface<SavingAccount> {
     }
 
     @Override
-    public List<Optional<SavingAccount>> showByCreationDate(Date creationDate) {
+    public List<Map<String, String>> showByCreationDate(LocalDate creationDate) {
         return null;
     }
+
 
     @Override
     public List<Map<String , String>> showByStatus(Status status) {

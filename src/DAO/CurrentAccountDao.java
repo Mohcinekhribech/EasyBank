@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class CurrentAccountDao implements AccountInterface<CurrentAccount> {
@@ -51,9 +52,10 @@ public class CurrentAccountDao implements AccountInterface<CurrentAccount> {
     }
 
     @Override
-    public List<Optional<CurrentAccount>> showByCreationDate(Date creationDate) {
+    public List<Map<String, String>> showByCreationDate(LocalDate creationDate) {
         return null;
     }
+
 
     @Override
     public List<Map<String , String>> showByStatus(Status status) {

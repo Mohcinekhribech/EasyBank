@@ -7,9 +7,11 @@ import Helpers.Database;
 import Interfaces.AccountInterface;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class AccountDao implements AccountInterface<Account>{
@@ -35,7 +37,26 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
-    public List<Optional<Account>> showByCreationDate(Date creationDate) {
+    public List<Map<String, String>> showByCreationDate(LocalDate creationDate) {
+        Map<String,String> account = new HashMap<>();
+        List<Map<String,String>> accounts = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select * from account where creationDate = ?");
+            statement.setDate(1, Date.valueOf(creationDate));
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                account.put("accountNumber",resultSet.getString("accountNumber"));
+                account.put("balance", String.valueOf(resultSet.getDouble("balance")));
+                account.put("creationDate",resultSet.getString("creationDate"));
+                account.put("client_code",resultSet.getString("client_code"));
+                account.put("status",resultSet.getString("status"));
+                accounts.add(account);
+            }
+            return accounts;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 
