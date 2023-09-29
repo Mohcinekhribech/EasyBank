@@ -4,10 +4,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Affectation {
+    private int id;
     private LocalDate startDate;
     private LocalDate endDate;
     private Employee employee;
     private Mission mission;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public LocalDate getStartDate() {
         return startDate;

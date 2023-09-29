@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface AffectationInterface {
     Optional<Affectation> add(Affectation affectation) throws SQLException;
-    int delete(Affectation affectation);
+    int delete(Affectation affectation) throws SQLException;
     List<Affectation> historicalAffectation();
     void statisticsAffectation();
 }
