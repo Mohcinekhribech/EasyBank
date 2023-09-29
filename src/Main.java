@@ -9,13 +9,15 @@ import Helpers.Database;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        MissionDao missionDao = new MissionDao();
-        System.out.println(missionDao.delete("1234"));
+//        MissionDao missionDao = new MissionDao();
+//        System.out.println(missionDao.delete("1234"));
 //        Operation operation = new Operation();
 //        Account account = new Account();
 //        Employee employee = new Employee();
@@ -28,10 +30,17 @@ public class Main {
 //        operation.setType(OperationType.payment);
         //System.out.println(operationDao.delete(2));
 
-//        EmployeDao em = new EmployeDao();
-//        for(String keys: operationDao.searchOperationByNum(3).keySet()){
-//            System.out.println(keys+ " : "  +operationDao.searchOperationByNum(3).get(keys));
-//        }
+//        Mission mission = new Mission();
+//        mission.setDescription("test");
+//        mission.setName("test");
+//        mission.setCode("123456");
+        MissionDao em = new MissionDao();
+//        em.add(mission);
+        List<Map<String,String>> missions = em.getAll();
+        for(int i =0;i<missions.size();i++)
+        for(String keys: missions.get(i).keySet()){
+            System.out.println(keys+ " : "  +missions.get(i).get(keys));
+        }
 //    }
     }
 }

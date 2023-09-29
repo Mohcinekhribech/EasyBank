@@ -4,11 +4,8 @@ import DTO.Mission;
 import Helpers.Database;
 import Interfaces.MissionInterface;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Optional;
+import java.sql.*;
+import java.util.*;
 
 public class MissionDao implements MissionInterface {
     Connection connection = Database.ConnectToDb();
@@ -39,5 +36,27 @@ public class MissionDao implements MissionInterface {
         {
             throw new RuntimeException();
         }
+    }
+
+    @Override
+    public List<Map<String, String>> getAll() {
+        Map<String , String> mission = new HashMap<>();
+        List<Map<String,String>> missions = new ArrayList<>();
+        try{
+            PreparedStatement statement = connection.prepareStatement("select * from mission");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next())
+            {
+                mission.put("code",resultSet.getString("code"));
+                mission.put("name",resultSet.getString("name"));
+                mission.put("description",resultSet.getString("description"));
+                missions.add(mission);
+            }
+            return missions;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
