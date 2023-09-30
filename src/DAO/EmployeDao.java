@@ -53,7 +53,27 @@ public class EmployeDao implements EmployeInterface {
     }
 
     @Override
-    public Optional<Employee> update(Employee employee, String registrationNumber) {
+    public Optional<Employee> update(Employee employee, String registrationNumber) throws SQLException {
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement("UPDATE  person set  firstName= ?, lastName=? , dateofbirth = ?, phonenumber = ? where id = (select id from employe where registrationNumber = ?) ");
+            statement.setString(1, employee.getFirstName());
+            statement.setString(2, employee.getLastName());
+            statement.setDate(3, employee.getRecruitmentDate()!=null?Date.valueOf(employee.getRecruitmentDate()):null);
+            statement.setString(4, employee.getPhoneNumber());
+            statement.setString(5,registrationNumber);
+            if(statement.executeUpdate()>0)
+            {
+                PreparedStatement statement1 = connection.prepareStatement("UPDATE employe set recrutmentDate = ?, email = ? where registrationNumber = ?");
+                statement1.setDate(1, employee.getRecruitmentDate()!=null?Date.valueOf(employee.getRecruitmentDate()):null);
+                statement1.setString(2,employee.getEmail());
+                statement1.setString(3,registrationNumber);
+                if(statement1.executeUpdate()>0)
+                {
+                    connection.commit();
+                    return Optional.of(employee);
+                }
+            }
+        connection.rollback();
         return Optional.empty();
     }
 
