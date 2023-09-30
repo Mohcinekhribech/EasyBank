@@ -13,5 +13,6 @@ public interface EmployeInterface {
     int delete(String registrationNumber);
     Optional<Employee> update(Employee employee,String registrationNumber);
     Map<String,String> SearchByRegistrationNumber(String registratonNumber);
-    List<Optional<Employee>> Search(Employee employee);
+    List<Map<String,String>> Search(Employee employee);
+    List<Map<String,String>> getAll() ;
 }
