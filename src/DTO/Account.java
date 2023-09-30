@@ -6,18 +6,18 @@ import java.util.Date;
 import java.util.List;
 
 public class Account {
-    private int accountNumber;
+    private String accountNumber;
     private float balance;
     private Date creationDate;
     private Status status;
     private Client client;
     private List<Operation> operations;
 
-    public int getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 

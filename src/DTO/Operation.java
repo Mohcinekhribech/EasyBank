@@ -2,19 +2,26 @@ package DTO;
 
 import DTO.Enum.OperationType;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Operation {
     private int operationNumber;
-    private java.util.Date Date;
+    private LocalDate date;
     private Account account;
     private Employee employee;
-
+    private OperationType type;
+    private double price;
 
     public Employee getEmployee() {
         return employee;
     }
+    public Account getAccount() {
+        return account;
+    }
 
+    public void setAccount(Account account) {
+        this.account = account;
+    }
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
@@ -27,12 +34,12 @@ public class Operation {
         this.operationNumber = operationNumber;
     }
 
-    public Date getDate() {
-        return Date;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDate(Date date) {
-        Date = date;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public OperationType getType() {
@@ -50,9 +57,6 @@ public class Operation {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    private OperationType type;
-    private double price;
 
 
 }
