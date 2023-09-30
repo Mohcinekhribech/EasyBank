@@ -5,10 +5,8 @@ import Helpers.Database;
 import Interfaces.ClientInterface;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.sql.Date;
+import java.util.*;
 
 public class ClientDao implements ClientInterface {
     Connection connection = Database.ConnectToDb();
@@ -78,9 +76,57 @@ public class ClientDao implements ClientInterface {
         }
         return null;
     }
+    public List<Map<String , String>> Search(Client client) {
+        Map<String,String> cl = new HashMap<>();
+        List<Map<String , String>> clients = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN client as cl ON cl.id = pr.id  where cl.code = ? OR firstname = ? OR lastName = ? OR phonenumber = ? OR dateOfBirth = ? OR adress = ?;");
+            statement.setString(1,client.getCode());
+            statement.setString(2,client.getFirstName());
+            statement.setString(3,client.getLastName());
+            statement.setString(4,client.getPhoneNumber());
+            statement.setDate(5, client.getDateOfBirth()!=null?Date.valueOf(client.getDateOfBirth()):null);
+            statement.setString(6,client.getAdress());
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                cl.put("firstName",resultSet.getString("firstName"));
+                cl.put("lastName",resultSet.getString("lastName"));
+                cl.put("dateOfBirth",resultSet.getString("dateOfBirth"));
+                cl.put("phoneNumber",resultSet.getString("phoneNumber"));
+                cl.put("code",resultSet.getString("code"));
+                cl.put("adress",resultSet.getString("adress"));
+                clients.add(cl);
+            }
+            return clients;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
-    public List<Client> showClients() {
+    public List<Map<String , String>> showClients() {
+        Map<String,String> cl = new HashMap<>();
+        List<Map<String , String>> clients = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN client as cl ON cl.id = pr.id ;");
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                cl.put("firstName",resultSet.getString("firstName"));
+                cl.put("lastName",resultSet.getString("lastName"));
+                cl.put("dateOfBirth",resultSet.getString("dateOfBirth"));
+                cl.put("phoneNumber",resultSet.getString("phoneNumber"));
+                cl.put("code",resultSet.getString("code"));
+                cl.put("adress",resultSet.getString("adress"));
+                clients.add(cl);
+            }
+            return clients;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 }

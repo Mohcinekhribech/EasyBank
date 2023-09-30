@@ -13,20 +13,21 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        ClientDao clientDao = new ClientDao();
-        //Client client = new Client();
-        SavingAccountDao savingAccount = new SavingAccountDao();
-        AccountDao accountDao = new AccountDao();
+
+//        ClientDao clientDao = new ClientDao();
+ //       //Client client = new Client();
+ //       SavingAccountDao savingAccount = new SavingAccountDao();
+ //       AccountDao accountDao = new AccountDao();
 
         //System.out.println(accountDao.changeState("1234566", String.valueOf(Status.active)));
         //System.out.println(accountDao.delete("1234567"));
-        List<Map<String,String>> mapList = accountDao.showByCreationDate(LocalDate.parse("2020-04-20"));
-        for(int i=0 ; i<mapList.size() ;i++)
-        {
-            for(String keys: mapList.get(i).keySet()){
-           System.out.println(keys+ " : "  +mapList.get(i).get(keys));
-            }
-        }
+   //     List<Map<String,String>> mapList = accountDao.showByCreationDate(LocalDate.parse("2020-04-20"));
+   //     for(int i=0 ; i<mapList.size() ;i++)
+   //     {
+   //         for(String keys: mapList.get(i).keySet()){
+   //        System.out.println(keys+ " : "  +mapList.get(i).get(keys));
+   //         }
+   //     }
 //        CurrentAccountDao currentAccountDao = new CurrentAccountDao();
 //        CurrentAccount currentAccount = new CurrentAccount();
 //        currentAccount.setAccountNumber("1234566");
@@ -39,6 +40,11 @@ public class Main {
 //        currentAccountDao.add(Optional.of(currentAccount));
 //        for(String keys: clientDao.searchByCode("AZERTY").keySet()){
 //            System.out.println(keys+ " : "  +clientDao.searchByCode("AZERTY").get(keys));
+//        ClientDao clientDao = new ClientDao();
+//        List<Map<String , String>> clients = clientDao.showClients();
+//        for(int i = 0; i<clients.size();i++)
+//        for(String keys: clients.get(i).keySet()){
+//            System.out.println(keys+ " : "  +clients.get(i).get(keys));
 //        }
         //System.out.println(clientDao.delete("AZERTY"));
 //        Client client = new Client();
@@ -49,10 +55,24 @@ public class Main {
 //        client.setDateOfBirth(LocalDate.parse("2020-02-02"));
 //        client.setPhoneNumber("0631560367");
 //        clientDao.add(Optional.of(client));
+ //       MissionDao missionDao = new MissionDao();
+ //       System.out.println(missionDao.delete("1234"));
+//        Operation operation = new Operation();
+//        Account account = new Account();
+//        Employee employee = new Employee();
+//        account.setAccountNumber("1234566");
+//        employee.setRegistrationNumber("121212");
+//        operation.setAccount(account);
+//        operation.setEmployee(employee);
+//        operation.setPrice(10000);
+//        operation.setDate(LocalDate.parse("2020-03-03"));
+//        operation.setType(OperationType.payment);
+        //System.out.println(operationDao.delete(2));
 
 //        EmployeDao em = new EmployeDao();
-//        for(String keys: em.SearchByRegistrationNumber("121212").keySet()){
-//            System.out.println(keys+ " : "  +em.SearchByRegistrationNumber("121212").get(keys));
+//        for(String keys: operationDao.searchOperationByNum(3).keySet()){
+//            System.out.println(keys+ " : "  +operationDao.searchOperationByNum(3).get(keys));
 //        }
+//    }
     }
 }

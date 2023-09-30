@@ -12,5 +12,5 @@ public interface ClientInterface {
     int delete(String code);
     Client update(Client client,String code);
     Map<String,String> searchByCode(String code);
-    List<Client> showClients();
+    List<Map<String,String>> showClients();
 }

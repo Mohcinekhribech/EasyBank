@@ -35,6 +35,7 @@ create table "SavingAccount" (
                                  id varchar(100) references account(accountNumber) on delete cascade on update cascade primary key
 );
 create type "operationType" as enum ('payment','withdrawal');
+select * from mission;
 create table "operation" (
                              operationNumber serial primary key ,
                              date date ,
