@@ -4,16 +4,19 @@ import DTO.Account;
 import DTO.Client;
 import DTO.Enum.Status;
 
-import java.util.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-public interface AccountInterface {
-    Account add(Account account);
+public interface AccountInterface<T> {
+    Optional<T>  add(Optional<T> account) throws SQLException;
     int delete(String accNum);
-    Account update(Account account);
-    List<Account> showByCreationDate(Date creationDate);
-    List<Account> showByStatus(Status status);
-    List<Account> show();
-    boolean changeState(String accNum);
-    List<Account> searchByClient(Client client);
+    Optional<T>  update(Optional<T>  account);
+    List<Map<String ,String> > showByCreationDate(LocalDate creationDate);
+    List<Map<String , String>> showByStatus(Status status);
+    List<Map<String,String>> show();
+    boolean changeState(String accNum,String status) throws SQLException;
+    List<Map<String,String>> searchByClient(String clientCode);
 }
