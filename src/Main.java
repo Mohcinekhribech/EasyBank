@@ -16,8 +16,23 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        MissionDao missionDao = new MissionDao();
-        System.out.println(missionDao.delete("1234"));
+//        ClientDao clientDao = new ClientDao();
+//        List<Map<String , String>> clients = clientDao.showClients();
+//        for(int i = 0; i<clients.size();i++)
+//        for(String keys: clients.get(i).keySet()){
+//            System.out.println(keys+ " : "  +clients.get(i).get(keys));
+//        }
+        //System.out.println(clientDao.delete("AZERTY"));
+//        Client client = new Client();
+//        client.setFirstName("Mohcine");
+//        client.setLastName("Khribech");
+//        client.setAdress("Agadir");
+//        client.setCode("AZERTY");
+//        client.setDateOfBirth(LocalDate.parse("2020-02-02"));
+//        client.setPhoneNumber("0631560367");
+//        clientDao.add(Optional.of(client));
+ //       MissionDao missionDao = new MissionDao();
+ //       System.out.println(missionDao.delete("1234"));
 //        Operation operation = new Operation();
 //        Account account = new Account();
 //        Employee employee = new Employee();
