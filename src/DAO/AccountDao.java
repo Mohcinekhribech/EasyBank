@@ -16,8 +16,6 @@ import java.util.*;
 
 public class AccountDao implements AccountInterface<Account>{
     Connection connection = Database.ConnectToDb();
-    @Override
-    public Optional<Account> add(Optional<Account> account){return Optional.empty();} ;
 
     @Override
     public int delete(String accNum) {
@@ -32,17 +30,13 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
-    public Optional<Account> update(Optional<Account> account) {
-        return Optional.empty();
-    }
-
-    @Override
     public List<Map<String, String>> showByCreationDate(LocalDate creationDate) {
         Map<String,String> account = new HashMap<>();
         List<Map<String,String>> accounts = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("select * from account where creationDate = ?");
             statement.setDate(1, Date.valueOf(creationDate));
+
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 account.put("accountNumber",resultSet.getString("accountNumber"));
@@ -108,16 +102,9 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
-    public boolean changeState(String accNum,String status) throws SQLException {
+    public boolean changeState(String accNum,Status status) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("update account set status = ?::status");
         statement.setString(1, String.valueOf(status));
         return statement.executeUpdate()>0;
     }
-
-    @Override
-    public List<Map<String, String>> searchByClient(String clientCode) {
-        return null;
-    }
-
-
 }

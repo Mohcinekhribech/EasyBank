@@ -50,7 +50,7 @@ public class ClientDao implements ClientInterface {
     }
 
     @Override
-    public Client update(Client client, String code) {
+    public Optional<Client> update(Client client, String code) {
         return null;
     }
 

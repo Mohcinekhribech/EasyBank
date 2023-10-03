@@ -5,6 +5,7 @@ import DTO.CurrentAccount;
 import DTO.Enum.Status;
 import Helpers.Database;
 import Interfaces.AccountInterface;
+import Interfaces.CurrentAccountInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
-public class CurrentAccountDao implements AccountInterface<CurrentAccount> {
+public class CurrentAccountDao implements CurrentAccountInterface {
     Connection connection = Database.ConnectToDb();
     @Override
     public Optional<CurrentAccount> add(Optional<CurrentAccount> account) throws SQLException {
@@ -42,34 +43,8 @@ public class CurrentAccountDao implements AccountInterface<CurrentAccount> {
     }
 
     @Override
-    public int delete(String accNum) {
-        return 0;
-    }
-
-    @Override
     public Optional<CurrentAccount> update(Optional<CurrentAccount> account) {
         return Optional.empty();
-    }
-
-    @Override
-    public List<Map<String, String>> showByCreationDate(LocalDate creationDate) {
-        return null;
-    }
-
-
-    @Override
-    public List<Map<String , String>> showByStatus(Status status) {
-        return null;
-    }
-
-    @Override
-    public List<Map<String , String>> show() {
-        return null;
-    }
-
-    @Override
-    public boolean changeState(String accNum,String status) {
-        return false;
     }
 
     @Override

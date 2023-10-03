@@ -1,20 +1,17 @@
 package DAO;
 
-import DTO.Account;
-import DTO.Client;
-import DTO.Enum.Status;
+import DTO.CurrentAccount;
 import DTO.SavingAccount;
 import Helpers.Database;
-import Interfaces.AccountInterface;
+import Interfaces.SavingAccountInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.*;
 
-public class SavingAccountDao implements AccountInterface<SavingAccount> {
+public class SavingAccountDao implements SavingAccountInterface {
     Connection connection = Database.ConnectToDb();
     @Override
     public Optional<SavingAccount> add(Optional<SavingAccount> account) throws SQLException {
@@ -43,34 +40,8 @@ public class SavingAccountDao implements AccountInterface<SavingAccount> {
     }
 
     @Override
-    public int delete(String accNum) {
-        return 0;
-    }
-
-    @Override
     public Optional<SavingAccount> update(Optional<SavingAccount> account) {
         return Optional.empty();
-    }
-
-    @Override
-    public List<Map<String, String>> showByCreationDate(LocalDate creationDate) {
-        return null;
-    }
-
-
-    @Override
-    public List<Map<String , String>> showByStatus(Status status) {
-        return null;
-    }
-
-    @Override
-    public List<Map<String , String>> show() {
-        return null;
-    }
-
-    @Override
-    public boolean changeState(String accNum,String status) {
-        return false;
     }
 
     @Override

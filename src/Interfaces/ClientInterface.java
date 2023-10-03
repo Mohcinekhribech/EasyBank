@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ClientInterface {
     Optional<Client> add(Optional<Client> client) throws SQLException;
     int delete(String code);
-    Client update(Client client,String code);
+    Optional<Client> update(Client client,String code);
     Map<String,String> searchByCode(String code);
     List<Map<String,String>> showClients();
 }
