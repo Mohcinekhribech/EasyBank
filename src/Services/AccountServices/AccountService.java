@@ -15,18 +15,19 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AccountService {
-    private CurrentAccountService currentAccountService= new CurrentAccountService(new CurrentAccount(),new CurrentAccountDao());
-    private SavingAccountService savingAccountService= new SavingAccountService(new SavingAccount(),new SavingAccountDao());
     private AccountDao accountDao;
     private Account account;
-    private Scanner scanner = new Scanner(System.in);
-    public AccountService(AccountDao accountDao, Account account)
+    private Scanner scanner;
+    public AccountService(AccountDao accountDao, Account account,Scanner scanner)
     {
         this.currentAccountService = currentAccountService;
         this.savingAccountService = savingAccountService;
         this.accountDao = accountDao;
         this.account = account;
+        this.scanner = scanner;
     }
+    private CurrentAccountService currentAccountService= new CurrentAccountService(new CurrentAccount(),new CurrentAccountDao());
+    private SavingAccountService savingAccountService= new SavingAccountService(new SavingAccount(),new SavingAccountDao());
     public void menu() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         int choice ;

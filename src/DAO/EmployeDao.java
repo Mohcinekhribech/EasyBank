@@ -89,7 +89,7 @@ public class EmployeDao implements EmployeInterface {
                 employe.put("lastName",resultSet.getString("lastName"));
                 employe.put("dateOfBirth",resultSet.getString("dateOfBirth"));
                 employe.put("phoneNumber",resultSet.getString("phoneNumber"));
-                employe.put("registrationNumber",resultSet.getString("registrationNumber"));
+                employe.put("registrationNumber",registratonNumber);
                 employe.put("recrutmentDate",resultSet.getString("recrutmentDate"));
                 employe.put("email",resultSet.getString("email"));
                 return employe;
@@ -103,7 +103,6 @@ public class EmployeDao implements EmployeInterface {
 
     @Override
     public List<Map<String , String>> Search(Employee employee) {
-        Map<String,String> employe = new HashMap<>();
         List<Map<String , String>> employes = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN employe as em ON em.id = pr.id  where em.registrationNumber = ? OR firstname = ? OR lastName = ? OR phonenumber = ? OR dateOfBirth = ? OR recrutmentDate = ? OR email = ?;");
@@ -116,11 +115,12 @@ public class EmployeDao implements EmployeInterface {
             statement.setString(7,employee.getEmail());
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
+                Map<String,String> employe = new HashMap<>();
+                employe.put("registrationNumber",resultSet.getString("registrationNumber"));
                 employe.put("firstName",resultSet.getString("firstName"));
                 employe.put("lastName",resultSet.getString("lastName"));
                 employe.put("dateOfBirth",resultSet.getString("dateOfBirth"));
                 employe.put("phoneNumber",resultSet.getString("phoneNumber"));
-                employe.put("registrationNumber",resultSet.getString("registrationNumber"));
                 employe.put("recrutmentDate",resultSet.getString("recrutmentDate"));
                 employe.put("email",resultSet.getString("email"));
                 employes.add(employe);
@@ -135,12 +135,12 @@ public class EmployeDao implements EmployeInterface {
 
     @Override
     public List<Map<String, String>> getAll() {
-        Map<String,String> employe = new HashMap<>();
         List<Map<String,String>> employes = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM person AS pr INNER JOIN employe as em ON em.id = pr.id ;");
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
+                Map<String,String> employe = new HashMap<>();
                 employe.put("firstName",resultSet.getString("firstName"));
                 employe.put("lastName",resultSet.getString("lastName"));
                 employe.put("dateOfBirth",resultSet.getString("dateOfBirth"));

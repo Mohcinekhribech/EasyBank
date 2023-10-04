@@ -8,6 +8,7 @@ import Interfaces.AccountInterface;
 import Interfaces.CurrentAccountInterface;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,8 +44,28 @@ public class CurrentAccountDao implements CurrentAccountInterface {
     }
 
     @Override
-    public Optional<CurrentAccount> update(Optional<CurrentAccount> account) {
-        return Optional.empty();
+    public Optional<CurrentAccount> update(Optional<CurrentAccount> account) throws SQLException {
+        return account;
+        // connection.setAutoCommit(false);
+        // PreparedStatement statement = connection.prepareStatement("UPDATE  account set  balance= ?, creationDate=? , client_code = ?, status = ? where id = (select id from client where code = ?) ");
+        // statement.setDouble(1, account.get().getBalance());
+        // statement.setDate(2, Date.valueOf(account.get().getCreationDate()));
+        // statement.setDate(3, Date.valueOf(account.get().getDateOfBirth()));
+        // statement.setString(4, account.get().getPhoneNumber());
+        // statement.setString(5,code);
+        // if(statement.executeUpdate()>0)
+        // {
+        //     PreparedStatement statement1 = connection.prepareStatement("UPDATE account set  adress = ? where code = ?");
+        //     statement1.setString(1,account.getAdress());
+        //     statement1.setString(2,code);
+        //     if(statement1.executeUpdate()>0)
+        //     {
+        //         connection.commit();
+        //         return Optional.of(account);
+        //     }
+        // }
+        // connection.rollback();
+        // return Optional.empty();
     }
 
     @Override
