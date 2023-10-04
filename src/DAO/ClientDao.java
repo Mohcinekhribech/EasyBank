@@ -50,8 +50,27 @@ public class ClientDao implements ClientInterface {
     }
 
     @Override
-    public Optional<Client> update(Client client, String code) {
-        return null;
+    public Optional<Client> update(Client client, String code) throws SQLException {
+        connection.setAutoCommit(false);
+        PreparedStatement statement = connection.prepareStatement("UPDATE  person set  firstName= ?, lastName=? , dateofbirth = ?, phonenumber = ? where id = (select id from client where code = ?) ");
+        statement.setString(1, client.getFirstName());
+        statement.setString(2, client.getLastName());
+        statement.setDate(3, client.getDateOfBirth()!=null?Date.valueOf(client.getDateOfBirth()):null);
+        statement.setString(4, client.getPhoneNumber());
+        statement.setString(5,code);
+        if(statement.executeUpdate()>0)
+        {
+            PreparedStatement statement1 = connection.prepareStatement("UPDATE client set  adress = ? where code = ?");
+            statement1.setString(1,client.getAdress());
+            statement1.setString(2,code);
+            if(statement1.executeUpdate()>0)
+            {
+                connection.commit();
+                return Optional.of(client);
+            }
+        }
+        connection.rollback();
+        return Optional.empty();
     }
 
     @Override
