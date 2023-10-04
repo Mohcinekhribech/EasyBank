@@ -30,12 +30,12 @@ public class AccountService {
     public void menu() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         int choice ;
-        System.out.println("----------------------------------------------------------------------------");
-        System.out.println(". 1 - Administre les compte courant    2 - Adminidtrer les compte epagne   .");
-        System.out.println(". 3 - Changer le status du compte      4-Afficher les comptes par statut   .");
-        System.out.println(". 5 - Afficher les compte  par date de creation                            .");
-        System.out.println(". 6 - Afficher les compte                                                  .");
-        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------");
+        System.out.println(". 1 - Administre les compte courant        2 - Adminidtrer les compte epagne                .");
+        System.out.println(". 3 - Changer le status du compte          4-Afficher les comptes par statut                .");
+        System.out.println(". 5 - Afficher les compte  par date de creation                                             .");
+        System.out.println(". 6 - Afficher les compte                  7 - afficher les compte par numero d'operation   .");
+        System.out.println("---------------------------------------------------------------------------------------------");
         System.out.print("entrer votre chois : ");
         choice = scanner.nextInt();
         switch (choice) {
@@ -50,6 +50,8 @@ public class AccountService {
             case 5 : showAccountByCreationDate();
             break;
             case 6 : show();
+            break;
+            case 7 : showAccountByOperationNumber();
             break;
 
         }
@@ -104,6 +106,19 @@ public class AccountService {
             for (int i=0 ; i<accounts.size();i++)
                 for(String keys: accounts.get(i).keySet()){
                     System.out.println(keys+ " : "  +accounts.get(i).get(keys));
+                }
+        }
+    }
+    public void showAccountByOperationNumber()
+    {
+        System.out.println("Entrer la date de creation du compte");
+        Map<String,String> account= accountDao.searchByOperationNumber(scanner.nextInt());
+        if(account.isEmpty())
+            System.out.println("Il n'y a pas de compte à cette date");
+        else
+        {
+                for(String keys: account.keySet()){
+                    System.out.println(keys+ " : "  +account.get(keys));
                 }
         }
     }

@@ -20,6 +20,7 @@ public class ClientService {
     {
         this.client = client;
         this.clientDao = clientDao;
+        scanner.close();
     }
     public void menu() throws SQLException {
         int choice;

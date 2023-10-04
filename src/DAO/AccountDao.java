@@ -102,6 +102,27 @@ public class AccountDao implements AccountInterface<Account>{
     }
 
     @Override
+    public Map<String, String> searchByOperationNumber(int operationNumber) {
+        Map<String,String> account = new HashMap<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM account where accountNumber = (select id from operation where operationNumber = ?);");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                account.put("accountNumber",resultSet.getString("accountNumber"));
+                account.put("balance", String.valueOf(resultSet.getDouble("balance")));
+                account.put("creationDate",resultSet.getString("creationDate"));
+                account.put("client_code",resultSet.getString("client_code"));
+                account.put("status",resultSet.getString("status"));
+            }
+            return account;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public boolean changeState(String accNum,Status status) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("update account set status = ?::status");
         statement.setString(1, String.valueOf(status));

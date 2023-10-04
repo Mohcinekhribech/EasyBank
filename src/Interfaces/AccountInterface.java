@@ -15,5 +15,6 @@ public interface AccountInterface<T> {
     List<Map<String ,String> > showByCreationDate(LocalDate creationDate);
     List<Map<String , String>> showByStatus(Status status);
     List<Map<String,String>> show();
+    Map<String,String> searchByOperationNumber(int operationNumber);
     boolean changeState(String accNum,Status status) throws SQLException;
 }
