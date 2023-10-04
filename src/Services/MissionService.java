@@ -18,7 +18,7 @@ public class MissionService {
     MissionDao missionDao;
     Affectation affectation ;
     AffectationDao affectationDao ;
-    MissionService(Mission mission,MissionDao missionDao,Affectation affectation ,AffectationDao affectationDao)
+    public MissionService(Mission mission,MissionDao missionDao,Affectation affectation ,AffectationDao affectationDao)
     {
         this.mission = mission;
         this.missionDao = missionDao;
@@ -106,10 +106,11 @@ public class MissionService {
             System.out.println("Il n'y a pas des mission");
         else
         {
-            for (int i=0 ; i<missions.size();i++)
+            for (int i=0 ; i<missions.size();i++){
                 for(String keys: missions.get(i).keySet()){
                     System.out.println(keys+ " : "  +missions.get(i).get(keys));
                 }
+            }
         }
     }
 

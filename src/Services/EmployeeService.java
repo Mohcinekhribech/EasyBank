@@ -14,10 +14,11 @@ public class EmployeeService {
     private Employee employee ;
     private EmployeDao employeDao;
     Scanner scanner = new Scanner(System.in);
-    public EmployeeService(Employee employee , EmployeDao employeDao)
+    public EmployeeService(Employee employee , EmployeDao employeDao,Scanner scanner)
     {
         this.employee = employee;
         this.employeDao = employeDao;
+        this.scanner = scanner;
     }
     public void menu() throws SQLException {
         int choice;
@@ -58,7 +59,7 @@ public class EmployeeService {
         System.out.print("entrer le nombre de tele : ");
         employee.setPhoneNumber(scanner.next());
         System.out.print("enter le matricule :");
-        employee.setEmail(scanner.next());
+        employee.setRegistrationNumber(scanner.next());
         if(employeDao.add(Optional.of(employee)).isPresent())
             System.out.println("employe "+employee.getFirstName() +" est ajouté");
         else
@@ -137,18 +138,22 @@ public class EmployeeService {
             } default: choice = scanner.nextInt();
         }
         List<Map<String,String>> employes= employeDao.Search(employee);
-        for (int i=0 ; i<employes.size();i++)
-        for(String keys: employes.get(i).keySet()){
-            System.out.println(keys+ " : "  +employes.get(i).get(keys));
+        for (int i=0 ; i<employes.size();i++){
+            System.out.println("---------------------------------");
+            for(String keys: employes.get(i).keySet()){
+                System.out.println(keys+ " : "  +employes.get(i).get(keys));
+            }
         }
     }
     public void showEmployes()
     {
         List<Map<String,String>> employes= employeDao.getAll();
-        for (int i=0 ; i<employes.size();i++)
+        for (int i=0 ; i<employes.size();i++){
+            System.out.println("---------------------------------");
             for(String keys: employes.get(i).keySet()){
                 System.out.println(keys+ " : "  +employes.get(i).get(keys));
             }
+        }
     }
     public void searchEmployeByMatricule()
     {

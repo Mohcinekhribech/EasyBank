@@ -2,6 +2,7 @@ package Services.AccountServices;
 
 import DAO.CurrentAccountDao;
 import DAO.SavingAccountDao;
+import DTO.Client;
 import DTO.CurrentAccount;
 import DTO.Enum.Status;
 
@@ -41,13 +42,15 @@ public class CurrentAccountService {
         }
     }
     public void addAccount() throws SQLException {
+        Client client=new Client(); 
         System.out.print("Entrer le nombre du compte : ");
         currentAccount.setAccountNumber(scanner.next());
         System.out.print("Entrer le solde :");
         currentAccount.setBalance(scanner.nextDouble());
-        currentAccount.setCreationDate(LocalDate.parse(scanner.next()));
+        currentAccount.setCreationDate(LocalDate.now());
         System.out.print("entrer le code de client : ");
-        currentAccount.getClient().setCode(scanner.next());
+        client.setCode(scanner.next());
+        currentAccount.setClient(client);
         currentAccount.setStatus(Status.active);
         System.out.print("enter le max sold :");
         currentAccount.setMaxPrice(scanner.nextDouble());

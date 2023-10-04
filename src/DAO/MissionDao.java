@@ -40,13 +40,13 @@ public class MissionDao implements MissionInterface {
 
     @Override
     public List<Map<String, String>> getAll() {
-        Map<String , String> mission = new HashMap<>();
         List<Map<String,String>> missions = new ArrayList<>();
         try{
             PreparedStatement statement = connection.prepareStatement("select * from mission");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next())
             {
+                Map<String , String> mission = new HashMap<>();
                 mission.put("code",resultSet.getString("code"));
                 mission.put("name",resultSet.getString("name"));
                 mission.put("description",resultSet.getString("description"));

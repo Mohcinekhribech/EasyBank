@@ -13,13 +13,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class OperationService {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner ;
     Operation operation;
     OperationDao operationDao;
-    public OperationService(Operation operation , OperationDao operationDao)
+    public OperationService(Operation operation , OperationDao operationDao ,Scanner scanner)
     {
         this.operation = operation;
         this.operationDao = operationDao;
+        this.scanner = scanner;
     }
     public void menu() throws SQLException {
         int choice;
@@ -56,7 +57,7 @@ public class OperationService {
             System.out.println("entrer ( 1 ) pour operation du versement ");
             System.out.println("entrer ( 2 ) pour operation du retrait\n : ");
             status = scanner.nextInt();
-        }while (status<3 && status>0);
+        }while (status>3 || status<0);
 
         operation.setType(OperationType.values()[status-1]);
         System.out.print("Entrer le sold d'operation");

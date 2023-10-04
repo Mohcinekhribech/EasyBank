@@ -15,12 +15,12 @@ import java.util.Scanner;
 public class ClientService {
     private Client client ;
     private ClientDao clientDao;
-    Scanner scanner = new Scanner(System.in);
-    public ClientService(Client client , ClientDao clientDao)
+    Scanner scanner ;
+    public ClientService(Client client , ClientDao clientDao,Scanner scanner)
     {
         this.client = client;
         this.clientDao = clientDao;
-        scanner.close();
+        this.scanner = scanner;
     }
     public void menu() throws SQLException {
         int choice;
