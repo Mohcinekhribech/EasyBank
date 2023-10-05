@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface AffectationInterface {
     Optional<Affectation> add(Affectation affectation) throws SQLException;
-    int delete(Affectation affectation) throws SQLException;
+    int delete(int id) throws SQLException;
     List<Map<String, String>> historicalAffectation(String registrationNumber) throws SQLException;
     Map<String, Integer> statisticsAffectation() throws SQLException;
 }
