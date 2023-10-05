@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class SavingAccountDao implements SavingAccountInterface {
@@ -40,7 +41,26 @@ public class SavingAccountDao implements SavingAccountInterface {
     }
 
     @Override
-    public Optional<SavingAccount> update(Optional<SavingAccount> account) {
+    public Optional<SavingAccount> update(Optional<SavingAccount> account,String code) throws SQLException {
+        connection.setAutoCommit(false);
+        PreparedStatement statement = connection.prepareStatement(
+                "UPDATE  account set  balance= ?, creationDate=? , status = ? where client_code = ? ");
+        statement.setDouble(1, account.get().getBalance());
+        statement.setDate(2, java.sql.Date.valueOf(account.get().getCreationDate()));
+        statement.setString(3, account.get().getClient().getCode());
+        statement.setString(4, String.valueOf(account.get().getStatus()));
+        statement.setString(5, code);
+        if (statement.executeUpdate() > 0) {
+            PreparedStatement statement1 = connection.prepareStatement(
+                    "UPDATE savingAccount set  interesrate = ? where id = (select id from account where client_code = ?)");
+            statement1.setDouble(1, account.get().getInterestRate());
+            statement1.setString(2, code);
+            if (statement1.executeUpdate() > 0) {
+                connection.commit();
+                return account;
+            }
+        }
+        connection.rollback();
         return Optional.empty();
     }
 
