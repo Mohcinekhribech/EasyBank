@@ -7,8 +7,12 @@ import Interfaces.AffectationInterface;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class AffectationDao implements AffectationInterface {
@@ -35,12 +39,30 @@ public class AffectationDao implements AffectationInterface {
     }
 
     @Override
-    public List<Affectation> historicalAffectation() {
-        return null;
+    public List<Map<String, String>> historicalAffectation(String registrationNumber) throws SQLException {
+        List<Map<String, String>> affects = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM affectation a join mission m on a.mission_code = m.code join person p on p.id = (select id from employe where registrationNumber = ?)  WHERE employe_registrationNumber = ?");
+        statement.setString(1, registrationNumber);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            Map<String, String> affect = new HashMap<>();
+            affect.put("startDate", String.valueOf(resultSet.getDate("startDate").toLocalDate()));
+            affect.put("endDate", String.valueOf(resultSet.getDate("endDate").toLocalDate()));
+            affect.put("mission",resultSet.getString("m.nom"));            affect.put("employe",resultSet.getString("p.nom")+" "+resultSet.getString("p.prenom"));
+            affects.add(affect);
+        }
+        return affects;
     }
 
     @Override
-    public void statisticsAffectation() {
-
+    public Map<String, Integer> statisticsAffectation() throws SQLException {
+        String query = "SELECT mission.*, COUNT(affectation.*) FROM mission JOIN affectation ON mission.code = affectation.mission_code GROUP BY mission.code;";
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+        Map<String, Integer> stringIntegerHashMaps = new HashMap<String, Integer>();
+        while (resultSet.next()) {
+            stringIntegerHashMaps.put(resultSet.getString("name"), resultSet.getInt("count"));
+        }
+        return stringIntegerHashMaps;
     }
 }
