@@ -32,9 +32,9 @@ public class AffectationDao implements AffectationInterface {
     }
 
     @Override
-    public int delete(Affectation affectation) throws SQLException {
+    public int delete(int id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("delete from affectation where id = ?");
-        statement.setInt(1,affectation.getId());
+        statement.setInt(1,id);
         return statement.executeUpdate();
     }
 

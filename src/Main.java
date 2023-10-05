@@ -1,46 +1,51 @@
-import DAO.ClientDao;
-import DAO.EmployeDao;
-import DAO.MissionDao;
-import DAO.OperationDao;
+import DAO.*;
 import DTO.*;
-import DTO.Enum.OperationType;
+import DTO.Enum.Status;
 import Helpers.Database;
+import Services.AccountServices.AccountService;
+import Services.AccountServices.CurrentAccountService;
+import Services.AccountServices.SavingAccountService;
+import Services.ClientService;
+import Services.EmployeeService;
+import Services.MissionService;
+import Services.OperationService;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-
-//        MissionDao missionDao = new MissionDao();
-//        System.out.println(missionDao.delete("1234"));
-//        Operation operation = new Operation();
-//        Account account = new Account();
-//        Employee employee = new Employee();
-//        account.setAccountNumber("1234566");
-//        employee.setRegistrationNumber("121212");
-//        operation.setAccount(account);
-//        operation.setEmployee(employee);
-//        operation.setPrice(10000);
-//        operation.setDate(LocalDate.parse("2020-03-03"));
-//        operation.setType(OperationType.payment);
-        //System.out.println(operationDao.delete(2));
-
-//        Mission mission = new Mission();
-//        mission.setDescription("test");
-//        mission.setName("test");
-//        mission.setCode("123456");
-        MissionDao em = new MissionDao();
-//        em.add(mission);
-        List<Map<String,String>> missions = em.getAll();
-        for(int i =0;i<missions.size();i++)
-        for(String keys: missions.get(i).keySet()){
-            System.out.println(keys+ " : "  +missions.get(i).get(keys));
+        Scanner scanner = new Scanner(System.in);
+        EmployeeService employeeService= new EmployeeService(new Employee(),new EmployeDao(),scanner);
+        ClientService clientService = new ClientService(new Client(),new ClientDao(),scanner);
+        AccountService accountService = new AccountService(new AccountDao(),new Account(),scanner);
+        OperationService operationService = new OperationService(new Operation(),new OperationDao(),scanner);
+        MissionService missionService = new MissionService(new Mission(), new MissionDao(),new Affectation(),new AffectationDao());
+        int choice ;
+        do{
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println(". 1 - Administre les employés    2 - Adminidtrer les clients    .");
+        System.out.println(".                                                               .");
+        System.out.println(". 3 - Administre les comptes     4 - Adminidtrer les operations .");
+        System.out.println(".                                                               .");
+        System.out.println(". 5 - Administre les missions                                   .");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.print("entrer votre chois : ");
+        choice = scanner.nextInt();
+        switch (choice) {
+            case 1 : employeeService.menu();
+            break;
+            case 2 : clientService.menu();
+            break;
+            case 3 : accountService.menu();
+            break;
+            case 4 : operationService.menu();
+            break;
+            case 5 : missionService.menu();
+            break;
+            default : scanner.close();
         }
-//    }
+    }while(choice<6&& choice>0);
     }
 }
